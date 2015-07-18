@@ -1,12 +1,15 @@
 ############################################################
 # Dockerfile to build ARMhf HAProxy Installed Containers
-# Based on armv7/armhf-ubuntu
-# Supports SSL
+# Based on armv7/armhf-ubuntu:14.10
+# Supports SSL - HAProxy Version 1.5.4
+# Version: 1.2 - July 16, 2015
 ############################################################
 
-FROM armv7/armhf-ubuntu:14.04.2
+FROM armv7/armhf-ubuntu:14.10
 
 MAINTAINER Troy Fontaine
+
+#ENV DEBIAN_FRONTEND noninteractive
 
 # Install Haproxy
 RUN \
@@ -21,7 +24,7 @@ ADD haproxy.cfg /etc/haproxy/haproxy.cfg
 ADD start.bash /haproxy-start
 
 # Define mountable directories.
-VOLUME ["/haproxy-override","/etc/ssl/"]
+VOLUME ["/haproxy-override","/etc/ssl"]
 
 # Define working directory.
 WORKDIR /etc/haproxy
